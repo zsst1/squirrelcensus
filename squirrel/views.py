@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Sighting
 from django.template import loader
+from django.shortcuts import redirect
+from .forms import SightingForm
 
 def map(request):
     template = loader.get_template('squirrel/map.html')
@@ -15,13 +17,39 @@ def sightings(request):
     context = {'item_list' : item_list }
     return HttpResponse(template_sightings.render(context,request))
 
+#def sighting_details(request,
 
-def update(request):
-    return HttpResponse('update')
+
+def update(request,squirrel_id):
+    squirrel = Sighting.objects.get(id = squirrel_id)
+    if request.method == 'POST':
+        form = SightingForm(request.POST, instance = squirrel)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/squirrel/sightings/squirrel_id')
+    else:
+        form = SightingForm(instance = squirrel)
+    context = {
+            'form' : form,
+    }
+    
+    return render(request, 'squirrel/update.html', context)
 
 
 def add(request):
-    return HttpResponse('add')
+    if request.method == 'POST':
+        form = SightingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(f'squirrel/sightings/add/')
+    else:
+        form = SightingForm()
+
+    context = {
+            'form' : form
+    }
+
+    return render(request, 'squirrel/update.html', context)
 
 
 def stats(request):
