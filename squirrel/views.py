@@ -14,11 +14,20 @@ def map(request):
 def sightings(request):
     item_list = Sighting.objects.all()
     template_sightings =  loader.get_template('squirrel/sightings.html')
-    context = {'item_list' : item_list }
+    context = {
+            'item_list' : item_list 
+    }
     return HttpResponse(template_sightings.render(context,request))
 
-#def sighting_details(request,
-
+def details(request,squirrel_id):
+    squirrel = Sighting.objects.get(id = squirrel_id)
+    if request.method == 'GET':
+        form = SightingForm(instance = squirrel)
+    context = {
+            'form':form,
+    }
+    return render(request, 'squirrel/details.html', context)
+   #return HttpResponse('details')
 
 def update(request,squirrel_id):
     squirrel = Sighting.objects.get(id = squirrel_id)
@@ -49,11 +58,13 @@ def add(request):
             'form' : form
     }
 
-    return render(request, 'squirrel/update.html', context)
+    return render(request, 'squirrel/add.html', context)
 
 
 def stats(request):
-    return HttpResponse('stats')
+    template = loader.get_template('squirrel/stats.html')
+    context = {}
+    return HttpResponse(template.render(context,request))
 
 
 

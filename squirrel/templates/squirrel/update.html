@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
 	<body>
+		<p>Do you have more information about this sighting?
+		Add those details here</p>
 		<form method = 'post'>
 			{% csrf_token %}
 
 			{{ form.as_p}}
 			<br>
+			<p>Save your changes by clicking the "Submit" button below</p>
 			<input type = 'submit' name = 'Submit'>
 		</form>
 	</body>
