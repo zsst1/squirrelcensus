@@ -29,13 +29,13 @@ def details(request,squirrel_id):
     return render(request, 'squirrel/details.html', context)
    #return HttpResponse('details')
 
-def update(request,squirrel_id):
-    squirrel = Sighting.objects.get(id = squirrel_id)
+def update(request,unique_squirrel_id):
+    squirrel = Sighting.objects.get(unique_squirrel_id = unique_squirrel_id)
     if request.method == 'POST':
         form = SightingForm(request.POST, instance = squirrel)
         if form.is_valid():
             form.save()
-            return redirect(f'/squirrel/sightings/squirrel_id')
+            return redirect(f'/squirrel/sightings/unique_squirrel_id')
     else:
         form = SightingForm(instance = squirrel)
     context = {
