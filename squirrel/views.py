@@ -27,7 +27,7 @@ def details(request,squirrel_id):
             'form':form,
     }
     return render(request, 'squirrel/details.html', context)
-   #return HttpResponse('details')
+   
 
 def update(request,unique_squirrel_id):
     squirrel = Sighting.objects.get(unique_squirrel_id = unique_squirrel_id)
