@@ -6,8 +6,9 @@ from django.shortcuts import redirect
 from .forms import SightingForm
 
 def map(request):
-    template = loader.get_template('squirrel/map.html')
-    context = {} 
+    sightings = Sighting.objects.all()
+    template = loader.get_template('squirrel/map.html') 
+    context = {'sightings' : sightings}
     return HttpResponse(template.render(context,request))
 
 
