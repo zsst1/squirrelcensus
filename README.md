@@ -1,5 +1,9 @@
 # squirrelcensus
-class project 
+Class Project 
+
+Project Group 12 , Section 1
+UNIs: [zs2368 , ok2278]
+https://ta-2019-254016.appspot.com/
 
 Based on data from 2018 Central Park Squirrel Census
 more information about the data: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw
